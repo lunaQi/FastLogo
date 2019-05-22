@@ -32,7 +32,7 @@ def get_category_id(cls):
             return category['id']
 
 j = 1
-with open('files/flickr_logo_32_vali_set_annotation.txt', 'r') as f:
+with open('files/test.txt', 'r') as f:
     img_number = 0
     file_name_dict = {}
     lines = [line for line in f.readlines() if line.strip()]
@@ -55,16 +55,16 @@ with open('files/flickr_logo_32_vali_set_annotation.txt', 'r') as f:
             img_number = img_number + 1
             file_name_dict[fn] = img_number
             img_id = file_name_dict[fn]
-        dataset['images'].append({
-            'coco_url': '',
-            'date_captured': '',
-            'file_name': fn,
-            'flickr_url': '',
-            'id': img_id,
-            'license': 0,
-            'width': img_width,
-            'height': img_height
-        })
+            dataset['images'].append({
+                'coco_url': '',
+                'date_captured': '',
+                'file_name': fn,
+                'flickr_url': '',
+                'id': img_id,
+                'license': 0,
+                'width': img_width,
+                'height': img_height
+            })
 
         dataset['annotations'].append({
             'area': width * height,
@@ -77,9 +77,11 @@ with open('files/flickr_logo_32_vali_set_annotation.txt', 'r') as f:
         })
         j += 1
 
-folder = os.path.join('files/', 'annotations')
+folder = os.path.join('files/', 'finalanno')
 if not os.path.exists(folder):
     os.makedirs(folder)
-json_name = os.path.join('files', 'annotations/val.json')
+json_name = os.path.join('files', 'finalanno/val.json')
 with open(json_name, 'w') as f:
     json.dump(dataset, f)
+print(len(dataset['images']))
+print(len(dataset['annotations']))
